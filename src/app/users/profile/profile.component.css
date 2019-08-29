@@ -1,0 +1,13 @@
+.square-box {
+  border-radius: 0.15rem;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: white;
+}
+
+.square-image {
+  position: relative;
+  width: 100%;
+  background: #4679bd;
+}

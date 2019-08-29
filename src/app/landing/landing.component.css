@@ -1,0 +1,52 @@
+.main {
+  background-color: rgb(0, 0, 0, 0.5);
+  height: 450px;
+  color: white;
+  position: relative;
+}
+
+.searchbar {
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+  border-top-right-radius: 0rem;
+  border-bottom-right-radius: 0rem;
+  border: none;
+  outline: none;
+  background-blend-mode: soft-light;
+}
+
+.form-inline .form-control {
+  width: 50%;
+}
+
+.btn-warning {
+  border-top-right-radius: 0rem;
+  border-bottom-right-radius: 0rem;
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+  background-color: rgba(64, 169, 255, 0.4);
+  border-color: rgba(64, 169, 255, 0.4);
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: rgba(64, 169, 255, 0.6);
+}
+
+#carouselExampleSlidesOnly {
+  z-index: -100;
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  height: inherit;
+  object-position: center;
+  object-fit: fill;
+}
+
+#content {
+  position: relative;
+  width: 1000px;
+  z-index: 100;
+}

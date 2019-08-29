@@ -1,0 +1,83 @@
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 px-1">
+      <div class="square-box d-flex align-items-center mb-2 ">
+        <img
+          class="image-fluid square-image"
+          src="../../../assets/profile-placeholder.png"
+          alt="profile pic"
+        />
+      </div>
+      <h3 class="text-center text-dark mb-0">{{ user.username }}</h3>
+      <p class="text-center text-primary font-italic">{{ user.email }}</p>
+      <hr />
+      <div *ngIf="authId === userId">
+        <button
+          *ngIf="!user.isDesigner"
+          class="btn btn-warning btn-lg btn-block"
+          [routerLink]="['/becomeDesigner', userId]"
+          routerLinkActive="router-link-active"
+        >
+          Become a Designer
+        </button>
+        <button
+          *ngIf="user.isDesigner"
+          class="btn btn-warning btn-lg btn-block"
+          [routerLink]="['/becomeDesigner', userId]"
+          routerLinkActive="router-link-active"
+        >
+          Edit Designer Profile
+        </button>
+        <button
+          *ngIf="user.isDesigner"
+          class="btn btn-success btn-lg btn-block"
+          [routerLink]="['/create']"
+          routerLinkActive="router-link-active"
+        >
+          Upload Artwork
+        </button>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-9 px-1">
+      <div class="row m-2 mb-3" *ngIf="user.isDesigner">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-primary">About Me</h5>
+              <p class="card-text">{{ user.description }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-primary">Skills</h5>
+              <p class="card-text">{{ user.skills }}</p>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div *ngIf="user.isDesigner">
+        <div class="text-light text-center bg-dark p-2">
+          <h5 class="mb-0">Uploads</h5>
+        </div>
+        <app-showcase
+          *ngIf="uploads.length != 0"
+          [artworks]="uploads"
+        ></app-showcase>
+        <hr />
+      </div>
+
+      <div *ngIf="authId === userId">
+        <div class="text-light text-center bg-dark p-2">
+          <h5 class="mb-0">Your Favourites</h5>
+        </div>
+        <app-showcase
+          *ngIf="favourites.length != 0"
+          [artworks]="favourites"
+        ></app-showcase>
+      </div>
+    </div>
+  </div>
+</div>

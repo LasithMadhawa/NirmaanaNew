@@ -1,0 +1,112 @@
+<div class="container">
+  <h2 class="text-center mt-5">
+    <span class="font-weight-light">Sell Your</span> Awesome Artworks!
+  </h2>
+  <hr />
+  <div *ngIf="isLoading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <form
+    *ngIf="!isLoading"
+    [formGroup]="form"
+    class="form-group my-5"
+    (submit)="onSaveArtwork()"
+  >
+    <div class="row">
+      <div class="col-9">
+        <div class="row">
+          <div class="col-9">
+            <input
+              class="form-control my-2"
+              type="text"
+              placeholder="Title"
+              formControlName="title"
+              name="title"
+            />
+          </div>
+          <div class="col-3">
+            <div class="input-group my-2">
+              <input
+                class="form-control "
+                type="number"
+                placeholder="Price"
+                name="price"
+                formControlName="price"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">LKR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <textarea
+          class="form-control my-2"
+          type="text"
+          placeholder="Image Preview"
+          formControlName="preview"
+          name="preview"
+          rows="6"
+        ></textarea>
+        <tag-input
+          formControlName="tags"
+          name="tags"
+          theme="bootstrap"
+        ></tag-input>
+      </div>
+      <div class="col-3">
+        <a
+          class="btn btn-light btn-block shadow-sm mt-2"
+          (click)="imagePicker.click()"
+        >
+          Upload Preview
+        </a>
+        <input
+          type="file"
+          #imagePicker
+          (change)="onImagePicked($event)"
+          accept="image/*"
+        />
+        <!-- <div
+          class="image-preview square-box"
+          *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
+        >
+          <img
+            [src]="imagePreview"
+            [alt]="form.value.title"
+            class="square-image image-fluid"
+          />
+        </div> -->
+        <div
+          *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
+          class="square-box d-flex align-items-center mb-2 "
+        >
+          <img
+            class="image-fluid square-image"
+            [src]="imagePreview"
+            alt="artwork.title"
+          />
+        </div>
+        <a
+          class="btn btn-dark text-light btn-block shadow-sm"
+          (click)="filePicker.click()"
+        >
+          Project Files
+        </a>
+        <input
+          type="file"
+          #filePicker
+          (change)="onFilePicked($event)"
+          accept=".zip,.rar"
+        />
+        <p class="text-success">
+          {{ zipFileName }}
+        </p>
+      </div>
+    </div>
+
+    <button class="btn btn-success btn-block mt-5" type="submit">Save</button>
+  </form>
+  <!-- <tag-input [(ngModel)]="tags"></tag-input> -->
+</div>

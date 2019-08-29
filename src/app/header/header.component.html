@@ -1,0 +1,319 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow">
+  <a
+    class="navbar-brand"
+    [routerLink]="['/']"
+    routerLinkActive="router-link-active"
+    ><img src="../../assets/images/Nirmaana_logo.svg"
+  /></a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a
+          [routerLink]="['']"
+          routerLinkActive="router-link-active"
+          class="nav-link"
+          href="#"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+
+      <li class="nav-item">
+        <div class="search-box">
+          <form [formGroup] class="form-inline ml-2 my-2 my-lg-0">
+            <input
+              class="form-control searchbar"
+              type="search"
+              placeholder="Search all resources"
+              aria-label="Search"
+            />
+            <button class="btn btn-warning my-2 my-sm-0" type="submit">
+              <fa-icon [icon]="faSearch"></fa-icon><b> Search</b>
+            </button>
+          </form>
+        </div>
+      </li>
+    </ul>
+    <!-- for the designers -->
+    <!-- <button
+      *ngIf="userIsAuthenticated"
+      [routerLink]="['/create']"
+      routerLinkActive="router-link-active"
+      class="btn btn-success btn-sm mr-2"
+    >
+      Upload Artwork
+    </button> -->
+    <button
+      *ngIf="!userIsAuthenticated"
+      class="btn btn-light btn-sm"
+      data-toggle="modal"
+      data-target="#signUpModal"
+    >
+      Sign up
+    </button>
+    <button
+      *ngIf="!userIsAuthenticated"
+      class="btn btn-primary btn-sm ml-2"
+      data-toggle="modal"
+      data-target="#signInModal"
+      id="signInBtn"
+      (click)="onSignInBtn()"
+    >
+      Sign in
+    </button>
+    <button
+      *ngIf="userIsAuthenticated"
+      [routerLink]="['/user', userId]"
+      routerLinkActive="router-link-active"
+      class="btn btn-warning btn-sm ml-2"
+    >
+      Go to Profile
+    </button>
+    <button
+      *ngIf="userIsAuthenticated"
+      (click)="onLogout()"
+      class="btn btn-primary btn-sm ml-2"
+    >
+      Logout
+    </button>
+  </div>
+</nav>
+
+<!-- LOGIN SCREEN -->
+
+<div
+  class="modal fade"
+  id="signInModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <img
+      style="height: 50px"
+      class="col-12 mb-3 mt-5 pl-4"
+      src="../../assets/images/Nirmaana_logo_white.svg"
+    />
+    <div class="modal-content">
+      <div class="modal-header pt-4">
+        <!-- <h5 class="modal-title col-12 text-center" id="exampleModalLabel">
+          Sign up
+        </h5> -->
+
+        <h3 class="text-center col-12"><strong>Sign in</strong></h3>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          id="closeBtn"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body px-5">
+        <!-- spinner----------- -->
+        <div *ngIf="isLoading" class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <form
+          *ngIf="!isLoading"
+          (submit)="onLogin(loginForm)"
+          #loginForm="ngForm"
+        >
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><fa-icon [icon]="faAt"></fa-icon
+              ></span>
+            </div>
+            <input
+              name="email"
+              ngModel
+              type="email"
+              class="form-control"
+              placeholder="Username or Email"
+              #emailInput="ngModel"
+              required
+              email
+            />
+          </div>
+          <div
+            class="alert alert-danger"
+            *ngIf="emailInput.invalid && emailInput.value !== ''"
+          >
+            Please enter a valid email
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><fa-icon [icon]="faKey"></fa-icon
+              ></span>
+            </div>
+            <input
+              name="password"
+              ngModel
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              #passwordInput="ngModel"
+              required
+            />
+          </div>
+          <div
+            class="alert alert-danger"
+            *ngIf="passwordInput.invalid && passwordInput.value !== ''"
+          >
+            Please enter a valid password
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            <b>Login</b>
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer mx-3">
+        <p class="text-center">
+          Registering to this website, you accept our
+          <a href="#"><b>Terms of use</b></a> and our
+          <a href="#"><b>Privacy policy</b></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGN UP SCREEN -->
+
+<div
+  class="modal fade"
+  id="signUpModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog ">
+    <img
+      style="height: 50px"
+      class="col-12 mb-3 mt-5 pl-4"
+      src="../../assets/images/Nirmaana_logo_white.svg"
+    />
+    <div class="modal-content">
+      <div class="modal-header pt-4">
+        <h3 class="text-center col-12"><strong>Sign up</strong></h3>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body px-5">
+        <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><fa-icon [icon]="faUser"></fa-icon
+              ></span>
+            </div>
+            <input
+              name="username"
+              ngModel
+              type="text"
+              class="form-control"
+              placeholder="Username"
+              #username="ngModel"
+              required
+            />
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><fa-icon [icon]="faEnvelope"></fa-icon
+              ></span>
+            </div>
+            <input
+              name="email"
+              ngModel
+              type="email"
+              class="form-control"
+              placeholder="Email"
+              #emailInput2="ngModel"
+              required
+              email
+            />
+          </div>
+          <div
+            class="alert alert-danger"
+            *ngIf="emailInput2.invalid && emailInput2.value !== ''"
+          >
+            Please enter a valid email
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><fa-icon [icon]="faKey"></fa-icon
+              ></span>
+            </div>
+            <input
+              name="password"
+              ngModel
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              #passwordInput2="ngModel"
+              required
+            />
+          </div>
+          <div
+            class="alert alert-danger"
+            *ngIf="passwordInput2.invalid && passwordInput2.value !== ''"
+          >
+            Please enter a valid password
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><fa-icon [icon]="faCheckDouble"></fa-icon
+              ></span>
+            </div>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Confirm password"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            <b>Create your account</b>
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer mx-3">
+        <p class="text-center">
+          Registering to this website, you accept our
+          <a href="#"><b>Terms of use</b></a> and our
+          <a href="#"><b>Privacy policy</b></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

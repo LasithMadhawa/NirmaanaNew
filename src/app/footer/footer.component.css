@@ -1,0 +1,15 @@
+#footer {
+  background-color: rgb(29, 35, 46);
+  color: white;
+  font-weight: 300;
+  font-size: 0.7rem;
+  height: 250px;
+}
+
+#companyLogo {
+  height: 80px;
+}
+
+.footerDetails {
+  opacity: 0.5;
+}
