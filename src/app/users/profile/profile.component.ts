@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   //   username: "lasithm",
   //   email: "test2@g"
   // };
-
+  isAdmin: boolean;
   user: User;
   userId: string;
   authId: string;
@@ -49,9 +49,10 @@ export class ProfileComponent implements OnInit {
           downloads: userData.downloads,
           favourites: userData.favourites,
           skills: userData.skills,
-          description: userData.description
+          description: userData.description,
+          isAdmin: userData.isAdmin
         };
-        console.log(this.user.username);
+        this.isAdmin = this.user.isAdmin;
 
         this.userService.getFavourites(this.userId).subscribe(favourites => {
           this.favourites = favourites.favourites;

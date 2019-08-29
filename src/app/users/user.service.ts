@@ -38,6 +38,7 @@ export class UserService {
       favourites: Artwork[];
       skills: string;
       description: string;
+      isAdmin: boolean;
     }>("http://localhost:3000/api/user/" + id);
     // .subscribe(user => {
     //   this.user = user;

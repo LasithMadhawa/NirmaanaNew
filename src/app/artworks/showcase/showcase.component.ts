@@ -21,6 +21,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   userId: string;
   user: User;
   userIsAuthenticated = false;
+  isAdmin: boolean;
   private artworkSub: Subscription;
   private authStatusSub: Subscription;
 
@@ -60,9 +61,11 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
               downloads: userData.downloads,
               favourites: userData.favourites,
               skills: userData.skills,
-              description: userData.description
+              description: userData.description,
+              isAdmin: userData.isAdmin
             };
             console.log(this.user.favourites);
+            this.isAdmin = this.user.isAdmin;
           });
         } else {
           this.user = {
@@ -73,7 +76,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
             downloads: [],
             favourites: [],
             skills: "",
-            description: ""
+            description: "",
+            isAdmin: null
           };
         }
       });
@@ -89,7 +93,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
           downloads: userData.downloads,
           favourites: userData.favourites,
           skills: userData.skills,
-          description: userData.description
+          description: userData.description,
+          isAdmin: userData.isAdmin
         };
         console.log(this.user.favourites);
         console.log("From other component");
@@ -104,7 +109,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
         downloads: [],
         favourites: [],
         skills: "",
-        description: ""
+        description: "",
+        isAdmin: null
       };
     }
     console.log(this.user.favourites);

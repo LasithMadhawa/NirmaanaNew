@@ -9,4 +9,5 @@ export interface User {
   favourites: Artwork[];
   skills: string;
   description: string;
+  isAdmin: boolean;
 }
