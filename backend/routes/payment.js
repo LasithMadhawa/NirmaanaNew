@@ -3,6 +3,35 @@ const checkAuth = require("../middleware/check-auth");
 const Payment = require("../models/payment");
 const router = express.Router();
 
+router.get("/getDataForReport", (req, res, next) => {
+  console.log("This is generating reports - Payments");
+  result = [];
+  sorted = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  Payment.aggregate([
+    {
+      $project: {
+        month: { $month: "$creationDate" },
+        year: { $year: "$creationDate" },
+        price: "$price"
+      }
+    }
+  ]).then(response => {
+    console.log(response);
+    result = response;
+    result.forEach(element => {
+      for (var x = 0; x < 12; x++) {
+        if (element.month == x + 1) {
+          sorted[x] += element.price;
+        }
+      }
+    });
+    console.log(sorted);
+    res.status(200).json({
+      data: sorted
+    });
+  });
+});
+
 router.post("", checkAuth, (req, res, next) => {
   // console.log("Enter payment");
   const payment = new Payment({

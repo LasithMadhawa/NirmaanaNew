@@ -55,6 +55,71 @@ const MIME_TYPE_MAP = {
 //   }
 // });
 
+router.get("/getDataForReport", (req, res, next) => {
+  console.log("This is generating reports - Artworks");
+  result = [];
+  sorted = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  Artwork.aggregate([
+    {
+      $project: {
+        month: { $month: "$creationDate" },
+        year: { $year: "$creationDate" }
+      }
+    }
+  ]).then(response => {
+    console.log(response);
+    result = response;
+    result.forEach(element => {
+      for (var x = 0; x < 12; x++) {
+        if (element.month == x + 1) {
+          sorted[x] += 1;
+        }
+      }
+    });
+    console.log(sorted);
+    res.status(200).json({
+      data: sorted
+    });
+  });
+});
+
+router.get("/getDataForReport_Tags", (req, res, next) => {
+  console.log("This is generating reports - Tags");
+  data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  Artwork.find().then(result => {
+    //console.log(result);
+    result.forEach(element => {
+      console.log(element.tags);
+      element.tags.forEach(tag => {
+        if (tag.value == "Birthdate") {
+          data[0]++;
+        } else if (tag.value == "Car") {
+          data[1]++;
+        } else if (tag.value == "Makola") {
+          data[2]++;
+        } else if (tag.value == "Kiribathgoda") {
+          data[3]++;
+        } else if (tag.value == "Kadawatha") {
+          data[4]++;
+        } else if (tag.value == "Gampaha") {
+          data[5]++;
+        } else if (tag.value == "Ganemulla") {
+          data[6]++;
+        } else if (tag.value == "Balummahara") {
+          data[7]++;
+        } else if (tag.value == "Waththala") {
+          data[8]++;
+        } else if (tag.value == "Ragama") {
+          data[9]++;
+        }
+      });
+    });
+
+    res.status(200).json({
+      data: data
+    });
+  });
+});
 const storage = multer.diskStorage({
   destination: (req, res, cb) => {
     cb(null, "backend/images");

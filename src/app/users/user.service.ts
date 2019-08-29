@@ -67,4 +67,27 @@ export class UserService {
       { artworkId }
     );
   }
+  getUserReportData() {
+    return this.http.get<{
+      data: any;
+    }>("http://localhost:3000/api/user/getDataForReport");
+  }
+
+  getArtworksReportData() {
+    return this.http.get<{
+      data: any;
+    }>("http://localhost:3000/api/artworks/getDataForReport");
+  }
+
+  getPaymentReportData() {
+    return this.http.get<{
+      data: any;
+    }>("http://localhost:3000/api/payment/getDataForReport");
+  }
+
+  getTagsReportData() {
+    return this.http.get<{
+      data: any;
+    }>("http://localhost:3000/api/artworks/getDataForReport_Tags");
+  }
 }

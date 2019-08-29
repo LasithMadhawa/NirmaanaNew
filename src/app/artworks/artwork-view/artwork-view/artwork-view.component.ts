@@ -43,6 +43,7 @@ export class ArtworkViewComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.authService.getUserId();
+    console.log(this.userId);
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.artworkId = paramMap.get("artworkId");
       this.artworkService.getArtwork(this.artworkId).subscribe(artworkData => {
@@ -54,7 +55,9 @@ export class ArtworkViewComponent implements OnInit {
           zipFilePath: artworkData.zipFilePath,
           tags: artworkData.tags,
           designer: artworkData.designer,
-          price: artworkData.price
+          price: artworkData.price,
+          nDownloads: artworkData.nDownloads,
+          nFavourites: artworkData.nFavourites
         };
       });
     });

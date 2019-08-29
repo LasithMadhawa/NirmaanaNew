@@ -10,6 +10,7 @@ import { ProfileComponent } from "./users/profile/profile.component";
 import { CreateProfileComponent } from "./users/create-profile/create-profile.component";
 import { DesignerProfileComponent } from "./users/designer-profile/designer-profile.component";
 import { PaymentsComponent } from "./payments/payments.component";
+import { ReportsComponent } from "./reports/reports/reports.component";
 
 const routes: Routes = [
   { path: "", component: LandingComponent },
@@ -30,8 +31,7 @@ const routes: Routes = [
   },
   {
     path: "user/:userId",
-    component: ProfileComponent,
-    canActivate: [AuthGuard]
+    component: ProfileComponent
   },
   {
     path: "editUser/:userId",
@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: "payment/:price/:artworkId",
     component: PaymentsComponent
+  },
+  {
+    path: "reports",
+    component: ReportsComponent
   }
 ];
 

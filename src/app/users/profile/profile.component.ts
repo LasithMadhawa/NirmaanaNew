@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
     // this.user = this.userService.getUserData();
     // console.log(JSON.stringify(this.user));
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      console.log("entering to profile");
+      alert("entering to profile");
       this.userId = paramMap.get("userId");
       this.userService.getUser(this.userId).subscribe(userData => {
         this.user = {

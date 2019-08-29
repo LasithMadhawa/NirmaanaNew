@@ -22,6 +22,7 @@ import { ProfileComponent } from "./users/profile/profile.component";
 import { CreateProfileComponent } from "./users/create-profile/create-profile.component";
 import { DesignerProfileComponent } from "./users/designer-profile/designer-profile.component";
 import { PaymentsComponent } from "./payments/payments.component";
+import { ReportsComponent } from './reports/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PaymentsComponent } from "./payments/payments.component";
     ProfileComponent,
     CreateProfileComponent,
     DesignerProfileComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

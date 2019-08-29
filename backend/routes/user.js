@@ -7,6 +7,37 @@ const checkAuth = require("../middleware/check-auth");
 
 const router = express.Router();
 
+router.get("/getDataForReport", (req, res, next) => {
+  console.log("This is generating reports");
+  result = [];
+  sorted = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  User.find().then(response => {
+    console.log(response);
+  });
+  User.aggregate([
+    {
+      $project: {
+        month: { $month: "$creationDate" },
+        year: { $year: "$creationDate" }
+      }
+    }
+  ]).then(response => {
+    console.log(response);
+    result = response;
+    result.forEach(element => {
+      for (var x = 0; x < 12; x++) {
+        if (element.month == x + 1) {
+          sorted[x] += 1;
+        }
+      }
+    });
+    console.log(sorted);
+    res.status(200).json({
+      data: sorted
+    });
+  });
+});
+
 router.put("/:id", checkAuth, (req, res, next) => {
   const user = {
     isDesigner: req.body.isDesigner,
@@ -110,15 +141,13 @@ router.post("/login", (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
-  User.findById(req.params.id)
-    .populate("downloads", "favourites")
-    .then(user => {
-      if (user) {
-        res.status(200).json(user);
-      } else {
-        res.status(404).json({ message: "User Not Found" });
-      }
-    });
+  User.findById(req.params.id).then(user => {
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: "User Not Found" });
+    }
+  });
 });
 
 router.get("/favourites/:id", (req, res, next) => {

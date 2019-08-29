@@ -42,7 +42,8 @@ export class DesignerProfileComponent implements OnInit {
             skills: userData.skills,
             description: userData.description,
             favourites: userData.favourites,
-            downloads: userData.downloads
+            downloads: userData.downloads,
+            isAdmin: userData.isAdmin
           };
         } else {
           this.user = {
@@ -53,7 +54,8 @@ export class DesignerProfileComponent implements OnInit {
             skills: "",
             description: "",
             favourites: userData.favourites,
-            downloads: userData.downloads
+            downloads: userData.downloads,
+            isAdmin: userData.isAdmin
           };
         }
 
