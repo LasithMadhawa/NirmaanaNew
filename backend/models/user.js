@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
   favourites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Artwork" }],
   skills: { type: String },
   description: { type: String },
-  isAdmin: { type: Boolean, default: false, required: true }
+  isAdmin: { type: Boolean, default: false, required: true },
+  creationDate: { type: Date, default: Date.now() }
 });
 
 userSchema.plugin(uniqueValidator);

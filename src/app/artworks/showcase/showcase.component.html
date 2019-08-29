@@ -27,6 +27,7 @@
               (click)="OnLike(artwork._id)"
             >
               <fa-icon [icon]="faHeart"></fa-icon>
+              {{ artwork.nFavourites.toString() }}
             </button>
             <button
               *ngIf="
@@ -36,6 +37,7 @@
               (click)="OnDislike(artwork._id)"
             >
               <fa-icon [icon]="faHeart"></fa-icon>
+              {{ (artwork.nFavourites + 1).toString() }}
             </button>
 
             <button

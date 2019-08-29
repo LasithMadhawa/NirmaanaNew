@@ -9,4 +9,6 @@ export interface Artwork {
   zipFilePath: string;
   tags: string;
   designer: User[];
+  nFavourites: number;
+  nDownloads: number;
 }

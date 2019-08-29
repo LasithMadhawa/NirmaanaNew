@@ -31,7 +31,9 @@ export class ArtworksService {
               zipFilePath: artwork.zipFilePath,
               tags: artwork.tags,
               designer: artwork.designer,
-              price: artwork.price
+              price: artwork.price,
+              nFavourites: artwork.nFavourites,
+              nDownloads: artwork.nDownloads
             };
           });
         })
@@ -64,7 +66,9 @@ export class ArtworksService {
               zipFilePath: artwork.zipFilePath,
               tags: artwork.tags.value,
               designer: artwork.designer,
-              price: artwork.price
+              price: artwork.price,
+              nFavourites: artwork.nFavourites,
+              nDownloads: artwork.nDownloads
             };
           });
         })
@@ -89,6 +93,8 @@ export class ArtworksService {
       tags: string;
       designer: User[];
       price: number;
+      nFavourites: number;
+      nDownloads: number;
     }>("http://localhost:3000/api/artworks/" + id);
   }
 
@@ -121,7 +127,9 @@ export class ArtworksService {
           zipFilePath: responseData.artwork.zipFilePath,
           tags: tags,
           designer: null,
-          price: price
+          price: price,
+          nFavourites: null,
+          nDownloads: null
         };
         this.artworks.push(artwork);
         this.artworkUploaded.next([...this.artworks]);
@@ -156,7 +164,9 @@ export class ArtworksService {
         zipFilePath: zipFile,
         tags: tags,
         designer: null,
-        price: price
+        price: price,
+        nFavourites: null,
+        nDownloads: null
       };
     }
     this.http
@@ -172,13 +182,27 @@ export class ArtworksService {
           zipFilePath: "",
           tags: tags,
           designer: null,
-          price: price
+          price: price,
+          nFavourites: null,
+          nDownloads: null
         };
 
         updatedArtworks[oldArtworkIndex] = artwork;
         this.artworks = updatedArtworks;
         this.artworkUploaded.next([...this.artworks]);
       });
+  }
+
+  addFavourite(id: string) {
+    return this.http.get(
+      "http://localhost:3000/api/artworks/addFavourite/" + id
+    );
+  }
+
+  remFavourite(id: string) {
+    return this.http.get(
+      "http://localhost:3000/api/artworks/remFavourite/" + id
+    );
   }
 
   deleteArtwork(artworkId: string) {

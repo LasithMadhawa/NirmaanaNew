@@ -192,4 +192,28 @@ router.delete("/:id", checkAuth, (req, res, next) => {
   });
 });
 
+router.get("/addFavourite/:id", (req, res, next) => {
+  Artwork.updateOne({ _id: req.params.id }, { $inc: { nFavourites: 1 } }).then(
+    result => {
+      if (result.n > 0) {
+        res.status(200).json({ message: "Favourite added Successfully" });
+      } else {
+        res.status(401).json({ message: "Favourite not added" });
+      }
+    }
+  );
+});
+
+router.get("/remFavourite/:id", (req, res, next) => {
+  Artwork.updateOne({ _id: req.params.id }, { $inc: { nFavourites: -1 } }).then(
+    result => {
+      if (result.n > 0) {
+        res.status(200).json({ message: "Favourite removed Successfully" });
+      } else {
+        res.status(401).json({ message: "Favourite not removed" });
+      }
+    }
+  );
+});
+
 module.exports = router;

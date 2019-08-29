@@ -49,7 +49,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       .getArtworkUpdateListener()
       .subscribe((artworks: Artwork[]) => {
         this.artworks = artworks;
-        console.log(this.artworks[0]);
+        console.log("Favourites:" + this.artworks[0].nFavourites);
         // Testin block
         if (this.userId != null) {
           this.userService.getUser(this.userId).subscribe(userData => {
@@ -128,6 +128,9 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       .addFavourites(this.userId, artworkId)
       .subscribe(response => {
         console.log(response);
+        this.artworksService.addFavourite(artworkId).subscribe(response => {
+          console.log(response);
+        });
         this.ngOnInit();
       });
   }
@@ -138,6 +141,9 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       .removeFavourites(this.userId, artworkId)
       .subscribe(response => {
         console.log(response);
+        this.artworksService.remFavourite(artworkId).subscribe(response => {
+          console.log(response);
+        });
         this.ngOnInit();
       });
   }

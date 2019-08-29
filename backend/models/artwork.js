@@ -11,7 +11,10 @@ const artworkSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
-  }
+  },
+  nFavourites: { type: Number, default: 0 },
+  nDownloads: { type: Number, default: 0 },
+  creationDate: { type: Date, default: Date.now() }
 });
 
 module.exports = mongoose.model("Artwork", artworkSchema);

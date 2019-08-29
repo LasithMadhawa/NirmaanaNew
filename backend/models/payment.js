@@ -14,7 +14,8 @@ const paymentSchema = mongoose.Schema({
   price: {
     type: Number,
     required: true
-  }
+  },
+  creationDate: { type: Date, default: Date.now() }
 });
 
 module.exports = mongoose.model("Payment", paymentSchema);
