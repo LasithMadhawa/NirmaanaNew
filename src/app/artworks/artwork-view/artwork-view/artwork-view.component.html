@@ -22,12 +22,13 @@
           <button class="btn btn-dark m-1">{{ tag.display }}</button>
         </div>
       </div>
-      <button
+      <a
         *ngIf="isPaid && isAuth"
         class="btn btn-success btn-lg btn-block mt-3"
+        href="{{ artwork.zipFilePath }}"
       >
         Download
-      </button>
+      </a>
       <button
         *ngIf="!isPaid && isAuth"
         [routerLink]="['/payment', artwork.price, artwork._id]"
