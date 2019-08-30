@@ -22,17 +22,24 @@
           <button class="btn btn-dark m-1">{{ tag.display }}</button>
         </div>
       </div>
-      <button *ngIf="isPaid" class="btn btn-success btn-lg btn-block mt-3">
+      <button
+        *ngIf="isPaid && isAuth"
+        class="btn btn-success btn-lg btn-block mt-3"
+      >
         Download
       </button>
       <button
-        *ngIf="!isPaid"
+        *ngIf="!isPaid && isAuth"
         [routerLink]="['/payment', artwork.price, artwork._id]"
         routerLinkActive="router-link-active"
         class="btn btn-warning btn-lg btn-block mt-3"
       >
         Pay
       </button>
+      <div class="alert alert-warning text-center mt-4" *ngIf="!isAuth">
+        Please<span class="text-primary"> sign in </span>to download this
+        artwork
+      </div>
     </div>
   </div>
 </div>

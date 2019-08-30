@@ -191,16 +191,16 @@ export class ReportsComponent implements OnInit {
       type: "bar",
       data: {
         labels: [
-          "Birthdate",
-          "Car",
-          "Makola",
-          "Kiribathgoda",
-          "Kadawatha",
-          "Gampaha",
-          "Ganemulla",
-          "Balummahara",
-          "Waththala",
-          "Ragama"
+          "Birthday",
+          "Music",
+          "Christmas",
+          "New Year",
+          "Art",
+          "Travel",
+          "Work",
+          "House",
+          "Computer",
+          "Relax"
         ],
         datasets: [
           {

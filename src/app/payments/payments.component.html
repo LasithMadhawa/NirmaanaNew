@@ -1,39 +1,32 @@
-<!-- <div class="container">
-  <h2 class="text-center mt-5">
-    <span class="font-weight-light">Become a Designer</span> | Get into
-    Earnings!
-  </h2>
-  <hr />
-  <div *ngIf="isLoading" class="d-flex justify-content-center">
-    <div class="spinner-border mb-5" role="status">
-      <span class="sr-only">Loading...</span>
+<div class="container d-flex align-items-center" style="height: 400px">
+  <div class="col-6 mx-auto my-5">
+    <div class="text-center">
+      <!-- <h1>
+        <span class="font-weight-light text-primary">Pay </span>{{ price }} LKR
+      </h1> -->
     </div>
+    <form (submit)="onPay()" #paymentForm="ngForm">
+      <input
+        id="creditCardNumber"
+        ngModel
+        #creditCardNumber="ngModel"
+        type="text"
+        placeholder="Enter your credit card number"
+        class="form-control mb-3"
+        pattern="4[0-9]{12}"
+        name="creditCardNumber"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="!creditCardNumber.valid && creditCardNumber.touched"
+      >
+        Invalid visa credit card number
+      </div>
+      <button class="btn btn-warning btn-block" type="submit">
+        <h1 class="mb-0">
+          <span class="font-weight-light">Pay </span>{{ price }} LKR
+        </h1>
+      </button>
+    </form>
   </div>
-  <form
-    *ngIf="!isLoading"
-    [formGroup]="form"
-    class="form-group my-5"
-    (submit)="onPay()"
-  >
-    <input
-      class="form-control my-2"
-      type="text"
-      placeholder="Skills you have [ i.e.: Adobe Photoshop, Adobe Illustrator, Coreldraw ]"
-      formControlName="skills"
-      name="skills"
-      required
-    />
-    <textarea
-      type="text"
-      class="form-control my-2"
-      placeholder="Brief description about yourself..."
-      name="description"
-      formControlName="description"
-      rows="6"
-      required
-    ></textarea>
-
-    <button class="btn btn-success btn-block mt-3" type="submit">Save</button>
-  </form>
-</div> -->
-<button class="btn btn-primary" (click)="onPay()">Pay</button>
+</div>

@@ -19,7 +19,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a
           [routerLink]="['']"
           routerLinkActive="router-link-active"
@@ -30,18 +30,23 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
-      </li>
+      </li> -->
 
       <li class="nav-item">
         <div class="search-box">
-          <form [formGroup] class="form-inline ml-2 my-2 my-lg-0">
+          <form class="form-inline ml-2 my-2 my-lg-0">
             <input
+              #search
               class="form-control searchbar"
               type="search"
               placeholder="Search all resources"
               aria-label="Search"
             />
-            <button class="btn btn-warning my-2 my-sm-0" type="submit">
+            <button
+              (click)="searchByTag(search.value)"
+              class="btn btn-warning my-2 my-sm-0"
+              type="submit"
+            >
               <fa-icon [icon]="faSearch"></fa-icon><b> Search</b>
             </button>
           </form>
@@ -79,7 +84,7 @@
       *ngIf="userIsAuthenticated"
       [routerLink]="['/user', userId]"
       routerLinkActive="router-link-active"
-      class="btn btn-warning btn-sm ml-2"
+      class="btn btn-outline-dark btn-sm ml-2"
     >
       Go to Profile
     </button>

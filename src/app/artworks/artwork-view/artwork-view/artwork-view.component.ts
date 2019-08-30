@@ -32,6 +32,7 @@ export class ArtworkViewComponent implements OnInit {
   designer: string;
   artwork: Artwork;
   payments: Payment[];
+  isAuth: boolean;
   private artworkId: string;
 
   constructor(
@@ -42,6 +43,7 @@ export class ArtworkViewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isAuth = this.authService.getIsAuth();
     this.userId = this.authService.getUserId();
     console.log(this.userId);
     this.route.paramMap.subscribe((paramMap: ParamMap) => {

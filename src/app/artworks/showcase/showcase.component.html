@@ -27,7 +27,6 @@
               (click)="OnLike(artwork._id)"
             >
               <fa-icon [icon]="faHeart"></fa-icon>
-              {{ artwork.nFavourites.toString() }}
             </button>
             <button
               *ngIf="
@@ -37,7 +36,6 @@
               (click)="OnDislike(artwork._id)"
             >
               <fa-icon [icon]="faHeart"></fa-icon>
-              {{ (artwork.nFavourites + 1).toString() }}
             </button>
 
             <button
@@ -69,6 +67,9 @@
             <div class="font-weight-light font-italic">
               {{ artwork.designer.username }}
             </div>
+            <p class="font-weight-light mb-0">
+              <fa-icon [icon]="faHeart"></fa-icon> {{ artwork.nFavourites }}
+            </p>
           </a>
           <!-- <p id="designer" class="ml-2 mb-1">{{ artwork.designer }}</p> -->
         </a>

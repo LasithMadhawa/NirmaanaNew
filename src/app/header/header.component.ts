@@ -11,6 +11,7 @@ import { NgForm } from "@angular/forms";
 import { AuthService } from "./auth.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
+import { ArtworksService } from "../artworks/artworks.service";
 
 @Component({
   selector: "app-header",
@@ -31,7 +32,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authListnerSubs: Subscription;
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private artworkService: ArtworksService
+  ) {}
 
   ngOnInit() {
     this.userId = this.authService.getUserId();
@@ -40,7 +45,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .getAuthStatusListner()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
-        this.closeSignInForm();
+        this.isLoading = false;
+        if (!this.userIsAuthenticated) {
+        } else {
+          this.closeSignInForm();
+        }
         this.userId = this.authService.getUserId();
       });
   }
@@ -59,6 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
     this.isLoading = true;
     this.authService.login(form.value.email, form.value.password);
+    this.isLoading = false;
     form.reset();
     // this.isLoading = false;
     // this.closeSignInForm();
@@ -89,5 +99,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ) as HTMLElement;
     element.click();
     console.log(element);
+  }
+
+  searchByTag(searchTag: string) {
+    // this.artworksService.getArtworksByTag(searchTag);
+    // this.artworkSub = this.artworksService
+    //   .getArtworkUpdateListener()
+    //   .subscribe((artworks: Artwork[]) => {
+    //     this.artworks = artworks;
+    //   });
+    console.log(searchTag);
+    if (searchTag === "") {
+      this.artworkService.getArtworks();
+    } else {
+      this.artworkService.getArtworksByTag(searchTag);
+    }
+    this.router.navigate(["/show"]);
   }
 }

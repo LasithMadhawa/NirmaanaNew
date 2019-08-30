@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, NgForm } from "@angular/forms";
 import { AuthService } from "../header/auth.service";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { PaymentService } from "./payment.service";
@@ -16,6 +16,7 @@ export class PaymentsComponent implements OnInit {
   userId: string;
   artworkId: string;
   price: number;
+  creditCardNumber: string;
 
   constructor(
     private authService: AuthService,

@@ -91,25 +91,25 @@ router.get("/getDataForReport_Tags", (req, res, next) => {
     result.forEach(element => {
       console.log(element.tags);
       element.tags.forEach(tag => {
-        if (tag.value == "Birthdate") {
+        if (tag.value == "birthday") {
           data[0]++;
-        } else if (tag.value == "Car") {
+        } else if (tag.value == "music") {
           data[1]++;
-        } else if (tag.value == "Makola") {
+        } else if (tag.value == "christmas") {
           data[2]++;
-        } else if (tag.value == "Kiribathgoda") {
+        } else if (tag.value == "new year") {
           data[3]++;
-        } else if (tag.value == "Kadawatha") {
+        } else if (tag.value == "art") {
           data[4]++;
-        } else if (tag.value == "Gampaha") {
+        } else if (tag.value == "travel") {
           data[5]++;
-        } else if (tag.value == "Ganemulla") {
+        } else if (tag.value == "work") {
           data[6]++;
-        } else if (tag.value == "Balummahara") {
+        } else if (tag.value == "house") {
           data[7]++;
-        } else if (tag.value == "Waththala") {
+        } else if (tag.value == "computer") {
           data[8]++;
-        } else if (tag.value == "Ragama") {
+        } else if (tag.value == "relax") {
           data[9]++;
         }
       });
@@ -148,7 +148,7 @@ router.post(
       title: req.body.title,
       preview: req.body.preview,
       imagePath: url + "/images/" + req.files.image[0].filename,
-      zipFilePath: url + "/images" + req.files.zipFile[0].filename,
+      zipFilePath: url + "/images/" + req.files.zipFile[0].filename,
       tags: JSON.parse(req.body.tags),
       designer: req.userData.userId,
       price: parseInt(req.body.price)
@@ -178,7 +178,7 @@ router.put(
     if (req.file) {
       const url = req.protocol + "://" + req.get("host");
       imagePath = url + "/images/" + req.files[0].filename;
-      zipFilePath = url + "/images" + req.files.zipFile[0].filename;
+      zipFilePath = url + "/images/" + req.files.zipFile[0].filename;
     }
     const artwork = new Artwork({
       _id: req.body._id,
@@ -205,6 +205,7 @@ router.put(
 
 router.get("", (req, res, next) => {
   Artwork.find()
+    .sort({ creationDate: -1 })
     .populate("designer")
     .then(documents => {
       res.status(200).json({

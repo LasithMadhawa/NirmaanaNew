@@ -40,10 +40,13 @@
       </button>
     </form>
     <div class="d-flex justify-content-center">
-      <button class="btn btn-outline-light btn-sm m-2 mt-4">
+      <!-- <button class="btn btn-outline-light btn-sm m-2 mt-4">
         Browse Popular Artworks
-      </button>
-      <button class="btn btn-outline-light btn-sm m-2 mt-4">
+      </button> -->
+      <button
+        (click)="searchByTag('')"
+        class="btn btn-outline-light btn-sm m-2 mt-4"
+      >
         Browse Latest Artworks
       </button>
     </div>
