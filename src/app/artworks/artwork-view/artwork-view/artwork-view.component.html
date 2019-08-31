@@ -10,16 +10,23 @@
     </div>
     <div class="col-6 py-5">
       <h1 class="mb-0">{{ artwork.title }}</h1>
-      <a
-        class="font-italic"
-        [routerLink]="['/user', artwork.designer._id]"
-        routerLinkActive="router-link-active"
-        >{{ artwork.designer.username }}</a
-      >
+      <h4 class="text-light bg-dark p-1 pl-3">
+        {{ artwork.price }} LKR
+        <a
+          class="text-light font-weight-light"
+          style="font-size: 1rem"
+          [routerLink]="['/user', artwork.designer._id]"
+          routerLinkActive="router-link-active"
+          >| {{ artwork.designer.username }}</a
+        >
+      </h4>
+
       <p class="mt-2">{{ artwork.preview }}</p>
       <div class="row ml-1  ">
         <div *ngFor="let tag of artwork.tags">
-          <button class="btn btn-dark m-1">{{ tag.display }}</button>
+          <button (click)="searchByTag(tag.display)" class="btn btn-dark m-1">
+            {{ tag.display }}
+          </button>
         </div>
       </div>
       <a

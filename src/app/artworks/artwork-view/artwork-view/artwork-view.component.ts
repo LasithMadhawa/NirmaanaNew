@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Artwork } from "../../artwork.model";
 import { ArtworksService } from "../../artworks.service";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { Payment } from "src/app/payments/payment.model";
 import { PaymentService } from "src/app/payments/payment.service";
 import { AuthService } from "src/app/header/auth.service";
@@ -39,7 +39,8 @@ export class ArtworkViewComponent implements OnInit {
     private artworkService: ArtworksService,
     private route: ActivatedRoute,
     private paymentService: PaymentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -73,5 +74,21 @@ export class ArtworkViewComponent implements OnInit {
         this.isPaid = isPaid.isPaid;
         console.log("Paid for" + this.isPaid);
       });
+  }
+
+  searchByTag(searchTag: string) {
+    // this.artworksService.getArtworksByTag(searchTag);
+    // this.artworkSub = this.artworksService
+    //   .getArtworkUpdateListener()
+    //   .subscribe((artworks: Artwork[]) => {
+    //     this.artworks = artworks;
+    //   });
+    console.log(searchTag);
+    if (searchTag === "") {
+      this.artworkService.getArtworks();
+    } else {
+      this.artworkService.getArtworksByTag(searchTag);
+    }
+    this.router.navigate(["/show"]);
   }
 }

@@ -1,4 +1,12 @@
 <div id="body">
+  <button
+    class="btn btn-block btn-success"
+    *ngIf="isAdmin"
+    [routerLink]="['/reports']"
+    routerLinkActive="router-link-active"
+  >
+    Reports
+  </button>
   <div class="row m-2 pt-2">
     <h2 class="text-center mx-auto my-5" *ngIf="artworks.length == 0">
       <span class="text-primary">I'm sorry :(</span> No results found!
