@@ -157,5 +157,6 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.user = null;
     this.userId = null;
     this.username = null;
+    this.isAdmin = false;
   }
 }

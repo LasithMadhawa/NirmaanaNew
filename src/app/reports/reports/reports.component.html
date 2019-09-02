@@ -1,4 +1,4 @@
-<div class="container text-center">
+<div id="PDF_Report" class="container text-center">
   <div class="row">
     <div class="col-12 my-3">
       <h3 class="my-5 font-weight-light ">Total Users Registered per Month</h3>
@@ -21,5 +21,10 @@
 
       <canvas id="tagsChart" height="120"></canvas>
     </div>
+  </div>
+</div>
+<div style="width: 100%" class="d-flex justify-content-center">
+  <div class="btn btn-warning px-5 py-3 m-5 shadow" (click)="genaratePdf()">
+    <b>Download PDF</b>
   </div>
 </div>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
 import { UserService } from "src/app/users/user.service";
+
+import * as jspdf from "jspdf";
+import html2canvas from "html2canvas";
 @Component({
   selector: "app-reports",
   templateUrl: "./reports.component.html",
@@ -229,6 +232,20 @@ export class ReportsComponent implements OnInit {
           ]
         }
       }
+    });
+  }
+
+  genaratePdf() {
+    const print = document.getElementById("PDF_Report");
+    html2canvas(print).then(canvas => {
+      const imgHeight = 280;
+      const imgWidth = 130;
+
+      const contentDataURL = canvas.toDataURL("image/png");
+      const pdf = new jspdf("p", "mm", "a4");
+      const position = 0;
+      pdf.addImage(contentDataURL, "PNG", 39, position, imgWidth, imgHeight);
+      pdf.save("nirmaana.pdf");
     });
   }
 }

@@ -23,8 +23,12 @@
 
       <p class="mt-2">{{ artwork.preview }}</p>
       <div class="row ml-1  ">
+        <p class="align-middle m-0 pt-2 mr-2"><b>Related Tags:</b></p>
         <div *ngFor="let tag of artwork.tags">
-          <button (click)="searchByTag(tag.display)" class="btn btn-dark m-1">
+          <button
+            (click)="searchByTag(tag.display)"
+            class="btn btn-sm btn-outline-dark m-1"
+          >
             {{ tag.display }}
           </button>
         </div>
