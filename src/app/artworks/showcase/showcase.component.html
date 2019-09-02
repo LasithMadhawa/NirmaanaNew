@@ -1,6 +1,6 @@
 <div id="body">
   <button
-    class="btn btn-block btn-success m-1"
+    class="btn btn-lg btn-block btn-success m-3"
     *ngIf="isAdmin"
     [routerLink]="['/reports']"
     routerLinkActive="router-link-active"
@@ -77,6 +77,7 @@
             </div>
             <p class="font-weight-light mb-0">
               <fa-icon [icon]="faHeart"></fa-icon> {{ artwork.nFavourites }}
+              <fa-icon [icon]="faDownload"></fa-icon> {{ artwork.nDownloads }}
             </p>
           </a>
           <!-- <p id="designer" class="ml-2 mb-1">{{ artwork.designer }}</p> -->

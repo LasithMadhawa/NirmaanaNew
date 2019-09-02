@@ -69,13 +69,23 @@
         <hr />
       </div>
 
-      <div *ngIf="authId === userId">
+      <div *ngIf="authId === userId && favourites.length != 0">
         <div class="text-light text-center bg-dark p-2">
-          <h5 class="mb-0">Your Favourites</h5>
+          <h5 class="mb-0">Favourites</h5>
         </div>
         <app-showcase
           *ngIf="favourites.length != 0"
           [artworks]="favourites"
+        ></app-showcase>
+      </div>
+
+      <div *ngIf="authId === userId && downloads.length != 0">
+        <div class="text-light text-center bg-dark p-2">
+          <h5 class="mb-0">Downloads</h5>
+        </div>
+        <app-showcase
+          *ngIf="downloads.length != 0"
+          [artworks]="downloads"
         ></app-showcase>
       </div>
     </div>

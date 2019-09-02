@@ -86,12 +86,12 @@
       routerLinkActive="router-link-active"
       class="btn btn-outline-dark btn-sm ml-2"
     >
-      Go to Profile
+      <fa-icon [icon]="faUser"></fa-icon> My Profile
     </button>
     <button
       *ngIf="userIsAuthenticated"
       (click)="onLogout()"
-      class="btn btn-primary btn-sm ml-2"
+      class="btn btn-outline-danger btn-sm ml-2"
     >
       Logout
     </button>

@@ -33,6 +33,7 @@
         *ngIf="isPaid && isAuth"
         class="btn btn-success btn-lg btn-block mt-3"
         href="{{ artwork.zipFilePath }}"
+        (click)="onDownload()"
       >
         Download
       </a>

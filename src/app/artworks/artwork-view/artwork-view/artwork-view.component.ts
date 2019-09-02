@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { Payment } from "src/app/payments/payment.model";
 import { PaymentService } from "src/app/payments/payment.service";
 import { AuthService } from "src/app/header/auth.service";
+import { UserService } from "src/app/users/user.service";
 
 @Component({
   selector: "app-artwork-view",
@@ -40,7 +41,8 @@ export class ArtworkViewComponent implements OnInit {
     private route: ActivatedRoute,
     private paymentService: PaymentService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -90,5 +92,19 @@ export class ArtworkViewComponent implements OnInit {
       this.artworkService.getArtworksByTag(searchTag);
     }
     this.router.navigate(["/show"]);
+  }
+
+  onDownload() {
+    // console.log("this is onDownload");
+    this.userService
+      .addDownloads(this.userId, this.artwork._id)
+      .subscribe(response => {
+        // console.log("response");
+        this.artworkService
+          .addDownload(this.artwork._id)
+          .subscribe(response => {
+            // console.log(response);
+          });
+      });
   }
 }

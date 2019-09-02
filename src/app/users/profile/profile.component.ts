@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   userId: string;
   authId: string;
   favourites: Artwork[];
+  downloads: Artwork[];
   uploads: Artwork[];
 
   constructor(
@@ -55,6 +56,11 @@ export class ProfileComponent implements OnInit {
 
         this.userService.getFavourites(this.userId).subscribe(favourites => {
           this.favourites = favourites.favourites;
+          // console.log(this.favourites);
+        });
+
+        this.userService.getDownloads(this.userId).subscribe(downloads => {
+          this.downloads = downloads.downloads;
           // console.log(this.favourites);
         });
 

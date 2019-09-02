@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, Injectable, Input } from "@angular/core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+
 import { Artwork } from "../artwork.model";
 import { ArtworksService } from "../artworks.service";
 import { Subscription } from "rxjs";
@@ -15,6 +17,7 @@ import { connectableObservableDescriptor } from "rxjs/internal/observable/Connec
 })
 export class ShowcaseComponent implements OnInit, OnDestroy {
   faHeart = faHeart;
+  faDownload = faDownload;
 
   @Input() artworks: Artwork[] = [];
   username: string;

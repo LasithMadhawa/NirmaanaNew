@@ -68,6 +68,16 @@ router.put("/addtofavourites/:id", (req, res, next) => {
   );
 });
 
+router.put("/addtodownloads/:id", (req, res, next) => {
+  User.findByIdAndUpdate(
+    req.params.id,
+    { $addToSet: { downloads: req.body.artworkId } },
+    () => {
+      res.status(200).json({ message: "Added to downloads" });
+    }
+  );
+});
+
 router.put("/removefavourites/:id", (req, res, next) => {
   User.findByIdAndUpdate(
     req.params.id,
@@ -161,6 +171,23 @@ router.get("/favourites/:id", (req, res, next) => {
       if (user) {
         // console.log(user);
         res.status(200).json({ favourites: user.favourites });
+      } else {
+        res.status(404).json({ message: "User Not Found" });
+      }
+    });
+});
+
+router.get("/downloads/:id", (req, res, next) => {
+  User.findById(req.params.id)
+    .populate({
+      path: "downloads",
+      populate: { path: "downloads" },
+      populate: { path: "designer" }
+    })
+    .then(user => {
+      if (user) {
+        // console.log(user);
+        res.status(200).json({ downloads: user.downloads });
       } else {
         res.status(404).json({ message: "User Not Found" });
       }

@@ -199,6 +199,13 @@ export class ArtworksService {
     );
   }
 
+  addDownload(id: string) {
+    console.log("this is service that increment no of downloads");
+    return this.http.get(
+      "http://localhost:3000/api/artworks/addDownload/" + id
+    );
+  }
+
   remFavourite(id: string) {
     return this.http.get(
       "http://localhost:3000/api/artworks/remFavourite/" + id

@@ -62,6 +62,12 @@
         >
           Upload Preview
         </a>
+        <div
+          *ngIf="imagePreview && form.get('image').invalid"
+          class="alert alert-danger"
+        >
+          Please upload an image file (JPG, JPEG, PNG)
+        </div>
         <input
           type="file"
           #imagePicker
@@ -88,12 +94,7 @@
             alt="artwork.title"
           />
         </div>
-        <div
-          *ngIf="imagePreview && form.get('image').invalid"
-          class="alert alert-danger"
-        >
-          Please upload an image file (JPG, JPEG, PNG)
-        </div>
+
         <a
           class="btn btn-dark text-light btn-block shadow-sm"
           (click)="filePicker.click()"

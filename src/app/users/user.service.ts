@@ -52,16 +52,30 @@ export class UserService {
     }>("http://localhost:3000/api/user/favourites/" + id);
   }
 
+  getDownloads(id: string) {
+    return this.http.get<{
+      downloads: Artwork[];
+    }>("http://localhost:3000/api/user/downloads/" + id);
+  }
+
   addFavourites(id: string, artworkId: string) {
-    console.log("came to service");
+    // console.log("came to service");
     return this.http.put(
       "http://localhost:3000/api/user/addtofavourites/" + id,
       { artworkId }
     );
   }
 
+  addDownloads(id: string, artworkId: string) {
+    // console.log("came to service");
+    return this.http.put(
+      "http://localhost:3000/api/user/addtodownloads/" + id,
+      { artworkId }
+    );
+  }
+
   removeFavourites(id: string, artworkId: string) {
-    console.log("came to service");
+    // console.log("came to service");
     return this.http.put(
       "http://localhost:3000/api/user/removefavourites/" + id,
       { artworkId }

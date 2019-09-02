@@ -270,6 +270,19 @@ router.get("/addFavourite/:id", (req, res, next) => {
   );
 });
 
+router.get("/addDownload/:id", (req, res, next) => {
+  // console.log("This is adding number of downloads");
+  Artwork.updateOne({ _id: req.params.id }, { $inc: { nDownloads: 1 } }).then(
+    result => {
+      if (result.n > 0) {
+        res.status(200).json({ message: "Download added Successfully" });
+      } else {
+        res.status(401).json({ message: "Download not added" });
+      }
+    }
+  );
+});
+
 router.get("/remFavourite/:id", (req, res, next) => {
   Artwork.updateOne({ _id: req.params.id }, { $inc: { nFavourites: -1 } }).then(
     result => {
