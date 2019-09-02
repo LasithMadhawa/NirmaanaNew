@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isLoading = false;
   userId: string;
+  isExistingEmail: boolean = false;
 
   userIsAuthenticated = false;
   private authListnerSubs: Subscription;
@@ -81,11 +82,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
     console.log("Valid");
 
-    this.authService.createUser(
-      form.value.email,
-      form.value.password,
-      form.value.username
-    );
+    this.authService
+      .createUser(form.value.email, form.value.password, form.value.username)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.closeSignUpForm();
+        },
+        error => {
+          this.isExistingEmail = true;
+        }
+      );
+    form.reset();
   }
 
   onLogout() {
@@ -99,6 +107,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ) as HTMLElement;
     element.click();
     console.log(element);
+  }
+
+  closeSignUpForm() {
+    const element: HTMLElement = document.getElementById(
+      "signUpCloseBtn"
+    ) as HTMLElement;
+    element.click();
   }
 
   searchByTag(searchTag: string) {

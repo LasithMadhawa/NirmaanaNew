@@ -44,7 +44,7 @@
         <textarea
           class="form-control my-2"
           type="text"
-          placeholder="Image Preview"
+          placeholder="Project folder description"
           formControlName="preview"
           name="preview"
           rows="6"
@@ -88,21 +88,31 @@
             alt="artwork.title"
           />
         </div>
+        <div
+          *ngIf="imagePreview && form.get('image').invalid"
+          class="alert alert-danger"
+        >
+          Please upload an image file (JPG, JPEG, PNG)
+        </div>
         <a
           class="btn btn-dark text-light btn-block shadow-sm"
           (click)="filePicker.click()"
         >
           Project Files
         </a>
+
+        <div *ngIf="form.get('zipFile').invalid" class="alert alert-danger">
+          Please upload a RAR file
+        </div>
+        <p class="text-success">
+          <span class="text-dark">Uploaded file: </span>{{ zipFileName }}
+        </p>
         <input
           type="file"
           #filePicker
           (change)="onFilePicked($event)"
-          accept=".zip,.rar"
+          accept=".rar"
         />
-        <p class="text-success">
-          {{ zipFileName }}
-        </p>
       </div>
     </div>
 

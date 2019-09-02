@@ -228,6 +228,7 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
+          id="signUpCloseBtn"
         >
           <span aria-hidden="true">&times;</span>
         </button>
@@ -289,13 +290,13 @@
               required
             />
           </div>
-          <div
+          <!-- <div
             class="alert alert-danger"
             *ngIf="passwordInput2.invalid && passwordInput2.value !== ''"
           >
             Please enter a valid password
-          </div>
-          <div class="input-group mb-3">
+          </div> -->
+          <!-- <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"
                 ><fa-icon [icon]="faCheckDouble"></fa-icon
@@ -306,6 +307,9 @@
               class="form-control"
               placeholder="Confirm password"
             />
+          </div> -->
+          <div *ngIf="isExistingEmail" class="alert alert-warning">
+            This account has been already registered!
           </div>
           <button type="submit" class="btn btn-primary btn-lg btn-block">
             <b>Create your account</b>
