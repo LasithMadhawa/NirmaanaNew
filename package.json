@@ -32,7 +32,7 @@
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "mime": "^2.4.4",
     "mongoose": "^5.5.14",
     "mongoose-unique-validator": "^2.0.3",
